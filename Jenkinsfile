@@ -11,7 +11,7 @@ pipeline {
 
     stage('Checkout Source') {
       steps {
-        git 'https://github.com/aksingh02/nginx-jenkins.git'
+        git branch: 'main', url: 'https://github.com/aksingh02/nginx-jenkins.git'
       }
     }
 
