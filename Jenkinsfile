@@ -26,7 +26,7 @@ pipeline {
     stage('setup kubeconfig') {
           steps {
             withCredentials([file(credentialsId: 'my_config', variable: 'my_config')]) {
-                sh "cp \${cd_config} ${WORKSPACE}/my_config"
+                sh "cp \${my_config} ${WORKSPACE}/my_config"
             }
           }
     }
