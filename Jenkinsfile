@@ -23,6 +23,14 @@ pipeline {
       }
     }
 
+    stage('setup kubeconfig') {
+          steps {
+            withCredentials([file(credentialsId: 'my_config', variable: 'my_config')]) {
+                sh "cp \${cd_config} ${WORKSPACE}/my_config"
+            }
+          }
+    }
+
     stage('Pushing Image') {
       environment {
                registryCredential = 'dockerhub-credentials'
@@ -36,10 +44,10 @@ pipeline {
       }
     }
 
-    stage('Deploy') {
-      withKubeConfig(credentialsId: 'my_config')  {
-        sh 'kubectl apply -f deployment.yaml'
-        sh 'kubectl apply -f service.yaml'
+    stage('string (secret text)') {
+      steps {
+        sh "kubectl apply -f deployment.yaml"
+        sh "kubectl apply -f service.yaml"
       }
     }
 
