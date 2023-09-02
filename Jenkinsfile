@@ -46,8 +46,8 @@ pipeline {
 
     stage('deploy') {
       steps {
-        sh "kubectl apply -f deployment.yaml"
-        sh "kubectl apply -f service.yaml"
+        sh "kubectl --kubeconfig ${WORKSPACE}/my_config config set-context --current --user=jenkins-admin"
+        sh "kubectl apply -f deployment.yaml --kubeconfig ${WORKSPACE}/my_config"
       }
     }
 
